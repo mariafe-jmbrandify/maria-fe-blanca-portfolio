@@ -378,9 +378,13 @@ h3 {
   }
 }
 
-@keyframes toolsMarquee {
+@keyframes marqueeScroll {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+
   to {
-    transform: translateX(calc(-50% - 0.5rem));
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
@@ -452,16 +456,28 @@ h3 {
   text-align: center;
 }
 
-.tools-marquee {
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.marquee-container {
   position: relative;
   width: min(100%, 78rem);
   margin: 0 auto;
   overflow: hidden;
-  mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%);
 }
 
-.tools-marquee::before,
-.tools-marquee::after {
+.marquee-container::before,
+.marquee-container::after {
   content: "";
   position: absolute;
   top: 0;
@@ -471,101 +487,119 @@ h3 {
   pointer-events: none;
 }
 
-.tools-marquee::before {
+.marquee-container::before {
   left: 0;
-  background: linear-gradient(90deg, rgba(5, 6, 10, 0.98), transparent);
+  background: linear-gradient(90deg, rgba(5, 6, 10, 0.98), rgba(5, 6, 10, 0));
 }
 
-.tools-marquee::after {
+.marquee-container::after {
   right: 0;
-  background: linear-gradient(270deg, rgba(5, 6, 10, 0.98), transparent);
+  background: linear-gradient(270deg, rgba(5, 6, 10, 0.98), rgba(5, 6, 10, 0));
 }
 
-.tools-track {
+.marquee-track {
   display: flex;
   width: max-content;
-  gap: 1rem;
-  animation: toolsMarquee 34s linear infinite;
+  animation: marqueeScroll 36s linear infinite;
   will-change: transform;
 }
 
-.tools-marquee:hover .tools-track {
+.marquee-container:hover .marquee-track {
   animation-play-state: paused;
+}
+
+.marquee-group {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: clamp(1rem, 2vw, 1.45rem);
+  padding-right: clamp(1rem, 2vw, 1.45rem);
 }
 
 .tool-logo {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 8.4rem;
-  min-height: 3.6rem;
-  padding: 0.8rem 1.15rem;
+  gap: 0.72rem;
+  height: 4rem;
+  min-width: 10.4rem;
+  padding: 0.68rem 1rem;
   color: var(--text);
   font-size: 0.92rem;
   font-weight: 800;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 0.7rem;
-  background: rgba(255, 255, 255, 0.055);
+  border: 1px solid rgba(93, 224, 230, 0.13);
+  border-radius: 0.85rem;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.025)),
+    rgba(5, 6, 10, 0.72);
   box-shadow:
     inset 0 0 0 1px rgba(255, 255, 255, 0.035),
-    0 0 1.5rem rgba(93, 224, 230, 0.05);
+    0 0 1.25rem rgba(93, 224, 230, 0.04);
+  opacity: 0.78;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    opacity 180ms ease,
+    transform 180ms ease;
   white-space: nowrap;
 }
 
+.tool-logo:hover {
+  border-color: rgba(194, 255, 180, 0.44);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.055),
+    0 0 1.7rem rgba(93, 224, 230, 0.22),
+    0 0 2.6rem rgba(194, 255, 180, 0.1);
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+.brand-icon {
+  display: inline-grid;
+  width: 2.5rem;
+  height: 2.5rem;
+  place-items: center;
+  flex: 0 0 auto;
+  color: #05060a;
+  font-size: 0.82rem;
+  font-weight: 900;
+  line-height: 1;
+  border-radius: 0.66rem;
+  background: linear-gradient(135deg, var(--aqua), var(--mint));
+  box-shadow:
+    0 0 1rem rgba(93, 224, 230, 0.24),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+}
+
 .tool-logo.highlevel {
-  color: #111827;
+  color: #f8fafc;
+}
+
+.tool-logo.highlevel .brand-icon {
   background: #f8fafc;
 }
 
-.tool-logo.zapier {
+.tool-logo.zapier .brand-icon {
+  color: #ffffff;
   background: #ff5a1f;
 }
 
-.tool-logo.wix {
+.tool-logo.wix .brand-icon {
+  color: #ffffff;
   background: #05060a;
+  box-shadow:
+    0 0 1rem rgba(93, 224, 230, 0.18),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.18);
 }
 
-.tool-logo.shopify {
+.tool-logo.shopify .brand-icon {
   color: #08200f;
   background: #95bf47;
 }
 
-.tool-logo.wordpress {
+.tool-logo.wordpress .brand-icon {
+  color: #ffffff;
   background: #21759b;
-}
-
-.tool-logo.squarespace {
-  background: #f8fafc;
-  color: #111827;
-}
-
-.tool-logo.systeme {
-  color: #5de0e6;
-  background: rgba(4, 15, 22, 0.94);
-}
-
-.tool-logo.canva {
-  background: linear-gradient(135deg, #5de0e6, #8b5cf6, #c2ffb4);
-}
-
-.tool-logo.kling,
-.tool-logo.gemini,
-.tool-logo.google,
-.tool-logo.elevenlabs {
-  color: #d8e8ff;
-  background: rgba(255, 255, 255, 0.075);
-}
-
-.tool-logo.base44 {
-  background: linear-gradient(135deg, #35e0b8, #8b5cf6);
-}
-
-.tool-logo.hubspot {
-  background: #ff5c35;
-}
-
-.tool-logo.pipedrive {
-  background: #12a454;
 }
 
 .section,
@@ -837,7 +871,7 @@ footer {
   .profile-photo-frame,
   .profile-photo-frame::before,
   .profile-photo-frame::after,
-  .tools-track {
+  .marquee-track {
     animation: none;
   }
 }
