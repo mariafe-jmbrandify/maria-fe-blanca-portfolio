@@ -190,34 +190,104 @@ h3 {
   aspect-ratio: 3 / 4;
   padding: 0.35rem;
   overflow: hidden;
+  isolation: isolate;
   border-radius: 1.12rem;
-  background:
-    linear-gradient(135deg, rgba(93, 224, 230, 0.95), rgba(194, 255, 180, 0.72) 36%, rgba(255, 255, 255, 0.18) 55%, rgba(93, 224, 230, 0.5)),
-    rgba(255, 255, 255, 0.08);
+  background: rgba(5, 6, 10, 0.92);
   box-shadow:
     0 0 0 1px rgba(255, 255, 255, 0.12),
-    0 0 2rem rgba(93, 224, 230, 0.24),
+    0 0 2.35rem rgba(93, 224, 230, 0.34),
+    0 0 5rem rgba(194, 255, 180, 0.12),
     0 1.6rem 3.5rem rgba(0, 0, 0, 0.38);
+  animation: cinematicFrameGlow 3.8s ease-in-out infinite;
+}
+
+.profile-photo-frame::before {
+  content: "";
+  position: absolute;
+  inset: -48%;
+  z-index: 0;
+  background:
+    conic-gradient(
+      from 0deg,
+      rgba(93, 224, 230, 0.08),
+      rgba(93, 224, 230, 1),
+      rgba(255, 255, 255, 0.94),
+      rgba(194, 255, 180, 0.95),
+      rgba(93, 224, 230, 0.12),
+      rgba(93, 224, 230, 1),
+      rgba(5, 6, 10, 0.05)
+    );
+  filter: blur(0.2rem);
+  animation: cinematicBorderSpin 4.8s linear infinite;
 }
 
 .profile-photo-frame::after {
   content: "";
   position: absolute;
   inset: 0.35rem;
+  z-index: 3;
   pointer-events: none;
   border-radius: 0.82rem;
+  background:
+    linear-gradient(115deg, transparent 0%, rgba(255, 255, 255, 0.22) 45%, transparent 58%) -160% 0 / 70% 100% no-repeat;
   box-shadow:
     inset 0 0 0 1px rgba(255, 255, 255, 0.18),
     inset 0 -4rem 5rem rgba(5, 6, 10, 0.16);
+  animation: cinematicLightSweep 3.2s ease-in-out infinite;
 }
 
 .profile-photo {
+  position: relative;
+  z-index: 2;
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center 12%;
   border-radius: 0.78rem;
+}
+
+@keyframes cinematicBorderSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes cinematicLightSweep {
+  0%,
+  18% {
+    background-position: -170% 0;
+    opacity: 0;
+  }
+
+  45% {
+    opacity: 0.72;
+  }
+
+  72%,
+  100% {
+    background-position: 220% 0;
+    opacity: 0;
+  }
+}
+
+@keyframes cinematicFrameGlow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.12),
+      0 0 2.2rem rgba(93, 224, 230, 0.3),
+      0 0 4.7rem rgba(194, 255, 180, 0.1),
+      0 1.6rem 3.5rem rgba(0, 0, 0, 0.38);
+  }
+
+  50% {
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.2),
+      0 0 3.1rem rgba(93, 224, 230, 0.55),
+      0 0 6rem rgba(194, 255, 180, 0.2),
+      0 1.6rem 3.5rem rgba(0, 0, 0, 0.38);
+  }
 }
 
 .panel-label {
@@ -534,6 +604,14 @@ footer {
   padding: 1.5rem clamp(1rem, 6vw, 6rem);
   color: var(--muted);
   border-top: 1px solid var(--line);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .profile-photo-frame,
+  .profile-photo-frame::before,
+  .profile-photo-frame::after {
+    animation: none;
+  }
 }
 
 @media (max-width: 900px) {
