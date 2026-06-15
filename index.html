@@ -117,33 +117,60 @@
         <div class="section-heading">
           <p class="eyebrow">Portfolio</p>
           <h2>Selected projects</h2>
+          <p>Choose a service area to preview sample work, outcomes, and the tools behind each project type.</p>
         </div>
-        <div class="work-grid">
-          <article class="work-card feature">
-            <p>Automation</p>
-            <h3>Zapier CRM Integration</h3>
-            <span>Step-by-step workflow, lead nurture sequence, CRM synchronization, and reduced manual admin.</span>
+        <div class="work-showcase">
+          <article class="work-preview" aria-live="polite">
+            <p class="preview-kicker" id="work-kicker">Automation</p>
+            <h3 id="work-title">Zapier CRM Integration</h3>
+            <p id="work-description">
+              Step-by-step workflow automation with lead nurture sequencing, CRM synchronization, and reduced manual
+              admin for a cleaner client onboarding process.
+            </p>
+            <div class="preview-meta">
+              <div>
+                <span>Sample deliverables</span>
+                <strong id="work-deliverables">Workflow map, Zapier build, CRM fields, handoff checklist</strong>
+              </div>
+              <div>
+                <span>Business outcome</span>
+                <strong id="work-outcome">Saved 10+ admin hours per week and improved response speed</strong>
+              </div>
+            </div>
+            <ul class="preview-tools" id="work-tools">
+              <li>Zapier</li>
+              <li>GoHighLevel</li>
+              <li>Google Sheets</li>
+              <li>Email routing</li>
+            </ul>
           </article>
-          <article class="work-card">
-            <p>E-commerce</p>
-            <h3>Shopify Fashion Boutique</h3>
-            <span>Full store setup, product listing, and a mobile-optimized shopping experience.</span>
-          </article>
-          <article class="work-card">
-            <p>Branding</p>
-            <h3>Full Brand Identity Suite</h3>
-            <span>Logo design, color system, visual guidelines, and assets for construction, retail, and logistics.</span>
-          </article>
-          <article class="work-card">
-            <p>AI Chatbot</p>
-            <h3>24/7 Lead Capture</h3>
-            <span>Automated inquiry handling, pre-qualification, and faster customer response time.</span>
-          </article>
-          <article class="work-card">
-            <p>Sales Funnel</p>
-            <h3>Lead Generation Engine</h3>
-            <span>High-conversion funnel architecture with booked-meeting paths and follow-up automation.</span>
-          </article>
+          <div class="work-menu" role="tablist" aria-label="Portfolio sample categories">
+            <button class="work-card is-active" type="button" data-work="automation" role="tab" aria-selected="true">
+              <span>Automation</span>
+              <strong>Zapier CRM Integration</strong>
+              <small>Lead routing, nurture flows, and system syncs.</small>
+            </button>
+            <button class="work-card" type="button" data-work="ecommerce" role="tab" aria-selected="false">
+              <span>E-commerce</span>
+              <strong>Shopify Fashion Boutique</strong>
+              <small>Store setup, product pages, and mobile shopping.</small>
+            </button>
+            <button class="work-card" type="button" data-work="branding" role="tab" aria-selected="false">
+              <span>Branding</span>
+              <strong>Full Brand Identity Suite</strong>
+              <small>Logo, color system, guidelines, and assets.</small>
+            </button>
+            <button class="work-card" type="button" data-work="chatbot" role="tab" aria-selected="false">
+              <span>AI Chatbot</span>
+              <strong>24/7 Lead Capture</strong>
+              <small>Inquiry handling and automated qualification.</small>
+            </button>
+            <button class="work-card" type="button" data-work="funnel" role="tab" aria-selected="false">
+              <span>Sales Funnel</span>
+              <strong>Lead Generation Engine</strong>
+              <small>Landing page, CRM capture, and follow-up path.</small>
+            </button>
+          </div>
         </div>
       </section>
 
