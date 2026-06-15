@@ -105,12 +105,71 @@ a {
 }
 
 .hero {
+  --hero-x: 50%;
+  --hero-y: 42%;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(20rem, 0.75fr);
   gap: clamp(2rem, 5vw, 5rem);
   align-items: center;
   min-height: calc(100vh - 5rem);
   padding: clamp(4rem, 8vw, 7rem) clamp(1rem, 6vw, 6rem);
+  background:
+    linear-gradient(120deg, rgba(93, 224, 230, 0.08), transparent 34%),
+    linear-gradient(240deg, rgba(194, 255, 180, 0.06), transparent 38%);
+}
+
+.hero-copy,
+.hero-panel {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-ambient,
+.hero-ambient span {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hero-ambient {
+  z-index: 0;
+  opacity: 0.82;
+  transform: translate3d(calc((var(--hero-x) - 50%) * 0.018), calc((var(--hero-y) - 50%) * 0.018), 0);
+}
+
+.ambient-grid {
+  background:
+    linear-gradient(rgba(93, 224, 230, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(93, 224, 230, 0.045) 1px, transparent 1px);
+  background-size: 4.2rem 4.2rem;
+  mask-image: linear-gradient(90deg, transparent, #000 18%, #000 78%, transparent);
+  animation: ambientGridDrift 22s linear infinite;
+}
+
+.ambient-particles {
+  background:
+    radial-gradient(circle at 16% 32%, rgba(93, 224, 230, 0.42) 0 1px, transparent 2px),
+    radial-gradient(circle at 74% 22%, rgba(194, 255, 180, 0.34) 0 1px, transparent 2px),
+    radial-gradient(circle at 46% 72%, rgba(255, 255, 255, 0.28) 0 1px, transparent 2px),
+    radial-gradient(circle at 88% 64%, rgba(93, 224, 230, 0.32) 0 1px, transparent 2px);
+  background-size: 22rem 18rem, 18rem 20rem, 26rem 22rem, 20rem 24rem;
+  filter: drop-shadow(0 0 0.55rem rgba(93, 224, 230, 0.32));
+  opacity: 0.42;
+  transform: translate3d(calc((var(--hero-x) - 50%) * -0.03), calc((var(--hero-y) - 50%) * -0.025), 0);
+  animation: ambientParticleDrift 28s ease-in-out infinite alternate;
+}
+
+.ambient-scan {
+  background:
+    linear-gradient(115deg, transparent 0%, rgba(93, 224, 230, 0.07) 44%, rgba(194, 255, 180, 0.055) 50%, transparent 58%),
+    linear-gradient(180deg, transparent, rgba(93, 224, 230, 0.035), transparent);
+  background-size: 64rem 100%, 100% 18rem;
+  opacity: 0.72;
+  transform: translate3d(calc((var(--hero-x) - 50%) * 0.025), calc((var(--hero-y) - 50%) * 0.018), 0);
+  animation: ambientScan 16s ease-in-out infinite;
 }
 
 .eyebrow {
@@ -204,21 +263,21 @@ h3 {
 .profile-photo-frame::before {
   content: "";
   position: absolute;
-  inset: -48%;
+  inset: -55%;
   z-index: 0;
   background:
     conic-gradient(
       from 0deg,
-      rgba(93, 224, 230, 0.08),
+      rgba(93, 224, 230, 0.02),
       rgba(93, 224, 230, 1),
       rgba(255, 255, 255, 0.94),
       rgba(194, 255, 180, 0.95),
-      rgba(93, 224, 230, 0.12),
+      rgba(93, 224, 230, 0.04),
       rgba(93, 224, 230, 1),
-      rgba(5, 6, 10, 0.05)
+      rgba(5, 6, 10, 0.02)
     );
-  filter: blur(0.2rem);
-  animation: cinematicBorderSpin 4.8s linear infinite;
+  filter: blur(0.18rem) saturate(1.25);
+  animation: cinematicBorderSpin 5.6s linear infinite;
 }
 
 .profile-photo-frame::after {
@@ -233,7 +292,7 @@ h3 {
   box-shadow:
     inset 0 0 0 1px rgba(255, 255, 255, 0.18),
     inset 0 -4rem 5rem rgba(5, 6, 10, 0.16);
-  animation: cinematicLightSweep 3.2s ease-in-out infinite;
+  animation: cinematicLightSweep 3.6s ease-in-out infinite;
 }
 
 .profile-photo {
@@ -290,6 +349,39 @@ h3 {
   }
 }
 
+@keyframes ambientGridDrift {
+  to {
+    background-position: 4.2rem 4.2rem, 4.2rem 4.2rem;
+  }
+}
+
+@keyframes ambientParticleDrift {
+  0% {
+    background-position: 0 0, 0 0, 0 0, 0 0;
+  }
+
+  100% {
+    background-position: 4rem -3rem, -3rem 2rem, 5rem 4rem, -4rem -5rem;
+  }
+}
+
+@keyframes ambientScan {
+  0%,
+  100% {
+    background-position: -48rem 0, 0 -10rem;
+  }
+
+  50% {
+    background-position: 56rem 0, 0 6rem;
+  }
+}
+
+@keyframes toolsMarquee {
+  to {
+    transform: translateX(calc(-50% - 0.5rem));
+  }
+}
+
 .panel-label {
   margin: 0 0 0.4rem;
   color: var(--mint);
@@ -342,6 +434,136 @@ h3 {
   font-weight: 800;
   line-height: 1.25;
   text-align: center;
+}
+
+.tools-marquee-section {
+  padding: clamp(3.5rem, 6vw, 5.5rem) 0;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(5, 6, 10, 0.98), rgba(7, 13, 18, 0.96)),
+    linear-gradient(90deg, rgba(93, 224, 230, 0.08), rgba(194, 255, 180, 0.04));
+  border-block: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.tools-marquee-section .eyebrow {
+  margin-bottom: 2.1rem;
+  text-align: center;
+}
+
+.tools-marquee {
+  position: relative;
+  width: min(100%, 78rem);
+  margin: 0 auto;
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+}
+
+.tools-marquee::before,
+.tools-marquee::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  z-index: 2;
+  width: 8rem;
+  height: 100%;
+  pointer-events: none;
+}
+
+.tools-marquee::before {
+  left: 0;
+  background: linear-gradient(90deg, rgba(5, 6, 10, 0.98), transparent);
+}
+
+.tools-marquee::after {
+  right: 0;
+  background: linear-gradient(270deg, rgba(5, 6, 10, 0.98), transparent);
+}
+
+.tools-track {
+  display: flex;
+  width: max-content;
+  gap: 1rem;
+  animation: toolsMarquee 34s linear infinite;
+  will-change: transform;
+}
+
+.tools-marquee:hover .tools-track {
+  animation-play-state: paused;
+}
+
+.tool-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 8.4rem;
+  min-height: 3.6rem;
+  padding: 0.8rem 1.15rem;
+  color: var(--text);
+  font-size: 0.92rem;
+  font-weight: 800;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.7rem;
+  background: rgba(255, 255, 255, 0.055);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.035),
+    0 0 1.5rem rgba(93, 224, 230, 0.05);
+  white-space: nowrap;
+}
+
+.tool-logo.highlevel {
+  color: #111827;
+  background: #f8fafc;
+}
+
+.tool-logo.zapier {
+  background: #ff5a1f;
+}
+
+.tool-logo.wix {
+  background: #05060a;
+}
+
+.tool-logo.shopify {
+  color: #08200f;
+  background: #95bf47;
+}
+
+.tool-logo.wordpress {
+  background: #21759b;
+}
+
+.tool-logo.squarespace {
+  background: #f8fafc;
+  color: #111827;
+}
+
+.tool-logo.systeme {
+  color: #5de0e6;
+  background: rgba(4, 15, 22, 0.94);
+}
+
+.tool-logo.canva {
+  background: linear-gradient(135deg, #5de0e6, #8b5cf6, #c2ffb4);
+}
+
+.tool-logo.kling,
+.tool-logo.gemini,
+.tool-logo.google,
+.tool-logo.elevenlabs {
+  color: #d8e8ff;
+  background: rgba(255, 255, 255, 0.075);
+}
+
+.tool-logo.base44 {
+  background: linear-gradient(135deg, #35e0b8, #8b5cf6);
+}
+
+.tool-logo.hubspot {
+  background: #ff5c35;
+}
+
+.tool-logo.pipedrive {
+  background: #12a454;
 }
 
 .section,
@@ -607,9 +829,13 @@ footer {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .ambient-grid,
+  .ambient-particles,
+  .ambient-scan,
   .profile-photo-frame,
   .profile-photo-frame::before,
-  .profile-photo-frame::after {
+  .profile-photo-frame::after,
+  .tools-track {
     animation: none;
   }
 }
