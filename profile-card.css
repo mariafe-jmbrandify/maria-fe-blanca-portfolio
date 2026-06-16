@@ -1,0 +1,146 @@
+.profile-glow-card {
+  position: relative;
+  padding: 1px;
+  overflow: visible;
+  border: 0;
+  border-radius: 1.6rem;
+  background:
+    conic-gradient(
+      from var(--profile-glow-angle, 0deg),
+      rgba(93, 224, 230, 0.16),
+      rgba(93, 224, 230, 0.96),
+      rgba(194, 255, 180, 0.86),
+      rgba(255, 255, 255, 0.42),
+      rgba(93, 224, 230, 0.16)
+    );
+  box-shadow:
+    0 2.8rem 6rem rgba(0, 0, 0, 0.52),
+    0 0 3.2rem rgba(93, 224, 230, 0.18),
+    0 0 5.5rem rgba(194, 255, 180, 0.1);
+  animation: profileGlowTrace 7s linear infinite;
+}
+
+.profile-glow-card::before {
+  content: "";
+  position: absolute;
+  inset: -1.3rem;
+  z-index: -1;
+  border-radius: 2.1rem;
+  background:
+    radial-gradient(circle at 24% 12%, rgba(93, 224, 230, 0.2), transparent 34%),
+    radial-gradient(circle at 82% 24%, rgba(194, 255, 180, 0.16), transparent 32%);
+  filter: blur(1.6rem);
+  opacity: 0.74;
+  animation: profileAuraPulse 4.5s ease-in-out infinite;
+}
+
+.profile-card-content {
+  position: relative;
+  display: grid;
+  gap: 1.35rem;
+  height: 100%;
+  padding: 1.05rem;
+  overflow: hidden;
+  border-radius: calc(1.6rem - 1px);
+  background:
+    linear-gradient(150deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.025)),
+    rgba(5, 6, 10, 0.92);
+}
+
+.profile-card-content::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(115deg, transparent 0%, rgba(255, 255, 255, 0.1) 46%, transparent 60%) -160% 0 / 62% 100% no-repeat;
+  opacity: 0;
+  animation: profileCardSweep 4.8s ease-in-out infinite;
+}
+
+.image-wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+.image-wrapper .profile-photo-frame {
+  border-radius: 1.18rem;
+}
+
+.card-meta {
+  position: relative;
+  z-index: 1;
+}
+
+.title-tag {
+  display: inline-flex;
+  margin-bottom: 0.5rem;
+  color: var(--mint);
+  font-size: 0.8rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-shadow: 0 0 1rem rgba(194, 255, 180, 0.22);
+}
+
+.card-meta h2 {
+  font-family: "Inter", Arial, sans-serif;
+  font-size: clamp(1.35rem, 2.4vw, 1.7rem);
+  line-height: 1.12;
+}
+
+.profile-card-content .stat-grid {
+  position: relative;
+  z-index: 1;
+}
+
+@property --profile-glow-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes profileGlowTrace {
+  to {
+    --profile-glow-angle: 360deg;
+  }
+}
+
+@keyframes profileAuraPulse {
+  0%,
+  100% {
+    opacity: 0.54;
+    transform: scale(0.98);
+  }
+
+  50% {
+    opacity: 0.9;
+    transform: scale(1.02);
+  }
+}
+
+@keyframes profileCardSweep {
+  0%,
+  22% {
+    background-position: -170% 0;
+    opacity: 0;
+  }
+
+  46% {
+    opacity: 0.64;
+  }
+
+  76%,
+  100% {
+    background-position: 230% 0;
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .profile-glow-card,
+  .profile-glow-card::before,
+  .profile-card-content::before {
+    animation: none;
+  }
+}
