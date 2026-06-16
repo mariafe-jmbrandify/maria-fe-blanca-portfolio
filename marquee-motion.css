@@ -1,0 +1,11 @@
+.marquee-track {
+  animation: marqueeScroll 30s linear infinite !important;
+}
+
+.marquee-container:hover .marquee-track {
+  animation-play-state: running;
+}
+
+.marquee-track:has(.tool-logo:hover) {
+  animation-play-state: paused;
+}
