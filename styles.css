@@ -665,7 +665,7 @@ h3 {
 }
 
 .section,
-system-section,
+.system-section,
 .testimonial-section,
 .contact-section {
   padding: clamp(4rem, 8vw, 7rem) clamp(1rem, 6vw, 6rem);
