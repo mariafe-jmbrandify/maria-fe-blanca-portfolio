@@ -81,6 +81,7 @@ const workDescription = document.getElementById("work-description");
 const workDeliverables = document.getElementById("work-deliverables");
 const workOutcome = document.getElementById("work-outcome");
 const workTools = document.getElementById("work-tools");
+const sampleCards = document.querySelectorAll(".sample-card");
 
 function updateWorkPreview(workKey) {
   const sample = workSamples[workKey];
@@ -107,6 +108,30 @@ function updateWorkPreview(workKey) {
   });
 }
 
+function routeToSample(targetId) {
+  const target = document.getElementById(targetId);
+
+  if (!target) {
+    return;
+  }
+
+  sampleCards.forEach((card) => card.classList.toggle("is-highlighted", card.id === targetId));
+  history.replaceState(null, "", `#${targetId}`);
+  target.scrollIntoView({ behavior: "smooth", block: "start" });
+  target.focus({ preventScroll: true });
+}
+
 workButtons.forEach((button) => {
-  button.addEventListener("click", () => updateWorkPreview(button.dataset.work));
+  button.addEventListener("click", () => {
+    updateWorkPreview(button.dataset.work);
+    routeToSample(button.dataset.sampleTarget);
+  });
 });
+
+if (window.location.hash) {
+  const activeSample = document.querySelector(window.location.hash);
+
+  if (activeSample?.classList.contains("sample-card")) {
+    sampleCards.forEach((card) => card.classList.toggle("is-highlighted", card === activeSample));
+  }
+}
