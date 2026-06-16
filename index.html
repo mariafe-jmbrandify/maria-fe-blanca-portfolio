@@ -16,6 +16,7 @@
     />
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="profile-card.css" />
+    <link rel="stylesheet" href="project-samples.css" />
     <link rel="stylesheet" href="marquee-motion.css" />
   </head>
   <body>
@@ -300,32 +301,97 @@
             </ul>
           </article>
           <div class="work-menu" role="tablist" aria-label="Portfolio sample categories">
-            <button class="work-card is-active" type="button" data-work="automation" role="tab" aria-selected="true">
+            <button class="work-card is-active" type="button" data-work="automation" data-sample-target="sample-automation" role="tab" aria-selected="true">
               <span>Automation</span>
               <strong>Zapier CRM Integration</strong>
-              <small>Lead routing, nurture flows, and system syncs.</small>
+              <small>Lead routing, nurture flows, and system syncs. Open sample.</small>
             </button>
-            <button class="work-card" type="button" data-work="ecommerce" role="tab" aria-selected="false">
+            <button class="work-card" type="button" data-work="ecommerce" data-sample-target="sample-ecommerce" role="tab" aria-selected="false">
               <span>E-commerce</span>
               <strong>Shopify Fashion Boutique</strong>
-              <small>Store setup, product pages, and mobile shopping.</small>
+              <small>Store setup, product pages, and mobile shopping. Open sample.</small>
             </button>
-            <button class="work-card" type="button" data-work="branding" role="tab" aria-selected="false">
+            <button class="work-card" type="button" data-work="branding" data-sample-target="sample-branding" role="tab" aria-selected="false">
               <span>Branding</span>
               <strong>Full Brand Identity Suite</strong>
-              <small>Logo, color system, guidelines, and assets.</small>
+              <small>Logo, color system, guidelines, and assets. Open sample.</small>
             </button>
-            <button class="work-card" type="button" data-work="chatbot" role="tab" aria-selected="false">
+            <button class="work-card" type="button" data-work="chatbot" data-sample-target="sample-chatbot" role="tab" aria-selected="false">
               <span>AI Chatbot</span>
               <strong>24/7 Lead Capture</strong>
-              <small>Inquiry handling and automated qualification.</small>
+              <small>Inquiry handling and automated qualification. Open sample.</small>
             </button>
-            <button class="work-card" type="button" data-work="funnel" role="tab" aria-selected="false">
+            <button class="work-card" type="button" data-work="funnel" data-sample-target="sample-funnel" role="tab" aria-selected="false">
               <span>Sales Funnel</span>
               <strong>Lead Generation Engine</strong>
-              <small>Landing page, CRM capture, and follow-up path.</small>
+              <small>Landing page, CRM capture, and follow-up path. Open sample.</small>
             </button>
           </div>
+        </div>
+      </section>
+
+      <section class="section sample-section" id="samples" aria-labelledby="samples-title">
+        <div class="section-heading">
+          <p class="eyebrow">Sample Work</p>
+          <h2 id="samples-title">Project samples</h2>
+          <p>Each selected project routes here so visitors can review the sample details, outputs, and tools.</p>
+        </div>
+        <div class="sample-grid">
+          <article class="sample-card" id="sample-automation" tabindex="-1">
+            <span>Automation</span>
+            <h3>Zapier CRM Integration</h3>
+            <p>Lead capture, CRM field mapping, automated follow-up, and clean handoff tasks for a faster response workflow.</p>
+            <ul>
+              <li>Workflow map</li>
+              <li>Zapier build</li>
+              <li>GoHighLevel CRM setup</li>
+              <li>Handoff checklist</li>
+            </ul>
+          </article>
+          <article class="sample-card" id="sample-ecommerce" tabindex="-1">
+            <span>E-commerce</span>
+            <h3>Shopify Fashion Boutique</h3>
+            <p>Mobile-first Shopify storefront structure with product organization, clean collections, and polished product pages.</p>
+            <ul>
+              <li>Homepage structure</li>
+              <li>Collection setup</li>
+              <li>Product listing format</li>
+              <li>Checkout QA path</li>
+            </ul>
+          </article>
+          <article class="sample-card" id="sample-branding" tabindex="-1">
+            <span>Branding</span>
+            <h3>Full Brand Identity Suite</h3>
+            <p>Brand foundation package built for consistent websites, social posts, proposals, and client-facing assets.</p>
+            <ul>
+              <li>Logo system</li>
+              <li>Color palette</li>
+              <li>Typography direction</li>
+              <li>Brand guidelines</li>
+            </ul>
+          </article>
+          <article class="sample-card" id="sample-chatbot" tabindex="-1">
+            <span>AI Chatbot</span>
+            <h3>24/7 Lead Capture</h3>
+            <p>Inquiry flow that captures lead details, answers common questions, qualifies interest, and routes follow-up.</p>
+            <ul>
+              <li>Conversation map</li>
+              <li>Lead fields</li>
+              <li>Automated replies</li>
+              <li>Routing logic</li>
+            </ul>
+          </article>
+          <article class="sample-card" id="sample-funnel" tabindex="-1">
+            <span>Sales Funnel</span>
+            <h3>Lead Generation Engine</h3>
+            <p>Conversion path from landing page to CRM capture, with nurturing and booked-meeting follow-up.</p>
+            <ul>
+              <li>Landing page</li>
+              <li>Opt-in flow</li>
+              <li>CRM capture</li>
+              <li>Follow-up sequence</li>
+            </ul>
+          </article>
         </div>
       </section>
 
